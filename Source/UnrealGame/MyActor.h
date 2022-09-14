@@ -11,8 +11,11 @@ class UNREALGAME_API AMyActor : public AActor
 {
 	GENERATED_BODY()
 private:
-	UPROPERTY(VisibleAnyWhere)
+	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* Mesh;
+
+	UPROPERTY(EditAnywhere, Category = ActorLevel)
+	int32 Level;
 	
 public:	
 	// Sets default values for this actor's properties
