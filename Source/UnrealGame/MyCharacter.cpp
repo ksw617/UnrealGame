@@ -52,12 +52,12 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::MoveUpDown);
-	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AMyCharacter::MoveLeftRight);
-
+	PlayerInputComponent->BindAxis(TEXT("MoveUpDown"), this, &AMyCharacter::MoveForwardBackward);
+	PlayerInputComponent->BindAxis(TEXT("MoveLeftRight"), this, &AMyCharacter::MoveLeftRight);
+	PlayerInputComponent->BindAxis(TEXT("LookLeftRight"), this, &AMyCharacter::LookLeftRight);
 }
 
-void AMyCharacter::MoveUpDown(float value)
+void AMyCharacter::MoveForwardBackward(float value)
 {
 	AddMovementInput(GetActorForwardVector(), value);
 }
@@ -65,5 +65,10 @@ void AMyCharacter::MoveUpDown(float value)
 void AMyCharacter::MoveLeftRight(float value)
 {
 	AddMovementInput(GetActorRightVector(), value);
+}
+
+void AMyCharacter::LookLeftRight(float value)
+{
+	AddControllerYawInput(value);
 }
 
