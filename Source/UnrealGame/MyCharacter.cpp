@@ -31,6 +31,9 @@ AMyCharacter::AMyCharacter()
 		GetMesh()->SetRelativeLocationAndRotation(FVector(0.f, 0.f, -88.f), FRotator(0.f, -90.f, 0.f));
 	}
 
+	X = 0.f;
+	Y = 0.f;
+
 }
 
 // Called when the game starts or when spawned
@@ -52,18 +55,20 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis(TEXT("MoveUpDown"), this, &AMyCharacter::MoveForwardBackward);
+	PlayerInputComponent->BindAxis(TEXT("MoveForwardBackward"), this, &AMyCharacter::MoveForwardBackward);
 	PlayerInputComponent->BindAxis(TEXT("MoveLeftRight"), this, &AMyCharacter::MoveLeftRight);
 	PlayerInputComponent->BindAxis(TEXT("LookLeftRight"), this, &AMyCharacter::LookLeftRight);
 }
 
 void AMyCharacter::MoveForwardBackward(float value)
 {
+	Y = value;
 	AddMovementInput(GetActorForwardVector(), value);
 }
 
 void AMyCharacter::MoveLeftRight(float value)
 {
+	X = value;
 	AddMovementInput(GetActorRightVector(), value);
 }
 

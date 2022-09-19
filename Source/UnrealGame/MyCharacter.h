@@ -16,6 +16,10 @@ private:
 		class USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere)
 		class UCameraComponent* Camera;
+	UPROPERTY(VisibleAnywhere)
+		float X;
+	UPROPERTY(VisibleAnywhere)
+		float Y;
 
 public:
 	// Sets default values for this character's properties
@@ -36,6 +40,10 @@ public:
 	void MoveForwardBackward(float value);
 	void MoveLeftRight(float value);
 	void LookLeftRight(float value);
+
+public:
+	float GetX() { return X; }
+	float GetY() { return Y; }
 
 
 };
