@@ -41,6 +41,12 @@ AMyCharacter::AMyCharacter()
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	AnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
+	if (AnimInstance)
+	{
+		AnimInstance->OnMontageEnded.AddDynamic(this, &AMyCharacter::OnAttackMontageEnded);
+	}
 	
 }
 
@@ -83,10 +89,42 @@ void AMyCharacter::LookLeftRight(float value)
 
 void AMyCharacter::Attack()
 {
-	auto AnimInstance = Cast<UMyAnimInstance>(GetMesh()->GetAnimInstance());
+	if (IsAttacking)
+	{
+		return;
+	}
+
 	if (AnimInstance)
 	{
-		AnimInstance->PlayAttackAnimation();
+		AnimInstance->PlayAttackAnimation(AttackIndex);
+		AttackIndex = (++AttackIndex) % 4;
+		IsAttacking = true;
+
+		FHitResult HitResult;
+		FCollisionQueryParams Params(NAME_None, false, this);
+
+		float AttackRange = 100.f;
+		float AttackRadius = 50.f;
+
+		bool Result = GetWorld()->SweepSingleByChannel(
+			OUT HitResult,
+			GetActorLocation(),
+			GetActorLocation() + GetActorForwardVector() * AttackRange,
+			FQuat::Identity,
+			ECollisionChannel::ECC_EngineTraceChannel2,
+			FCollisionShape::MakeSphere(AttackRadius),
+			Params);
+
+		if (Result && HitResult.GetActor())
+		{
+			UE_LOG(LogTemp, Log, TEXT("Hit : %s"), *HitResult.GetActor()->GetName());
+		}
 	}
+}
+
+void AMyCharacter::OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted)
+{
+	//Todo
+	IsAttacking = false;
 }
 

@@ -35,13 +35,14 @@ void UMyAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	}
 }
 
-void UMyAnimInstance::PlayAttackAnimation()
+void UMyAnimInstance::PlayAttackAnimation(int32 index)
 {
-	if (IsValid(AttackMontage)) 
-	{
-		if (!Montage_IsPlaying(AttackMontage))
-		{
-			Montage_Play(AttackMontage, 1.f);
-		}
-	}
+	Montage_Play(AttackMontage, 1.f);
+	FName AniName = FName(*FString::Printf(TEXT("Attack_%d"), index));
+	Montage_JumpToSection(AniName, AttackMontage);
+}
+
+void UMyAnimInstance::AnimNotify_Hit()
+{
+	//UE_LOG(LogTemp, Log, TEXT("Hit"));
 }

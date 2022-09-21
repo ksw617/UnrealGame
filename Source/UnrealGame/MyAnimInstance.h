@@ -33,5 +33,8 @@ public:
 public:
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 public:
-	void PlayAttackAnimation();
+	void PlayAttackAnimation(int32 index);
+
+	UFUNCTION()
+		void AnimNotify_Hit();
 };

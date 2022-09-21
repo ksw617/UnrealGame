@@ -21,6 +21,13 @@ private:
 	UPROPERTY(VisibleAnywhere)
 		float Y;
 
+	UPROPERTY()
+		class UMyAnimInstance* AnimInstance;
+	UPROPERTY(VisibleAnywhere)
+		bool IsAttacking = false;
+	UPROPERTY()
+		int32 AttackIndex = 0;
+
 public:
 	// Sets default values for this character's properties
 	AMyCharacter();
@@ -41,6 +48,9 @@ public:
 	void MoveLeftRight(float value);
 	void LookLeftRight(float value);
 	void Attack();
+
+	UFUNCTION()
+		void OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted);
 
 public:
 	float GetX() { return X; }
