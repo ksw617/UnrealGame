@@ -20,13 +20,15 @@ private:
 		float X;
 	UPROPERTY(VisibleAnywhere)
 		float Y;
-
 	UPROPERTY()
 		class UMyAnimInstance* AnimInstance;
 	UPROPERTY(VisibleAnywhere)
 		bool IsAttacking = false;
 	UPROPERTY()
 		int32 AttackIndex = 0;
+
+	UPROPERTY(VisibleAnywhere)
+		UStaticMeshComponent* Weapon;
 
 public:
 	// Sets default values for this character's properties
@@ -48,6 +50,7 @@ public:
 	void MoveLeftRight(float value);
 	void LookLeftRight(float value);
 	void Attack();
+	void OnHit();
 
 	UFUNCTION()
 		void OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted);

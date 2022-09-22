@@ -44,5 +44,5 @@ void UMyAnimInstance::PlayAttackAnimation(int32 index)
 
 void UMyAnimInstance::AnimNotify_Hit()
 {
-	//UE_LOG(LogTemp, Log, TEXT("Hit"));
+	OnAttackHit.Broadcast();
 }

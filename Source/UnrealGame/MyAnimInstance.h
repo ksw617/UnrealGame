@@ -6,6 +6,9 @@
 #include "Animation/AnimInstance.h"
 #include "MyAnimInstance.generated.h"
 
+//델리게이트 만들기 F원하는이름
+DECLARE_MULTICAST_DELEGATE(FOnAttackHit);
+
 /**
  * 
  */
@@ -28,6 +31,9 @@ private:
 
 	UPROPERTY(Category = Animation, EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 		UAnimMontage* AttackMontage;
+
+public:
+	FOnAttackHit OnAttackHit;
 public:
 	UMyAnimInstance();
 public:
