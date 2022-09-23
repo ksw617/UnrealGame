@@ -50,17 +50,6 @@ void AMyCharacter::BeginPlay()
 		AnimInstance->OnAttackHit.AddUObject(this, &AMyCharacter::OnHit);
 	}
 
-	FName WeaponSocket(TEXT("Hand_LSocket"));
-	if (GetMesh()->DoesSocketExist(WeaponSocket))
-	{
-		auto MyWeapon = GetWorld()->SpawnActor<AMyItem>(FVector::ZeroVector, FRotator::ZeroRotator);
-		
-		if (MyWeapon)
-		{
-			MyWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponSocket);
-		}
-	}
-	
 }
 
 // Called every frame
