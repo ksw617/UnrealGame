@@ -17,6 +17,7 @@ void UMyActorComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+
 }
 
 void UMyActorComponent::InitializeComponent()
@@ -35,21 +36,45 @@ void UMyActorComponent::SetLevel(int32 NewLevel)
 		if (CharacterData)
 		{
 			Level = CharacterData->Level;
-			Hp = CharacterData->MaxHp;
+			MaxHp = CharacterData->MaxHp;
+			Hp = MaxHp;
 		}
 	}
-
-	UE_LOG(LogTemp, Warning, TEXT("Lv: %d, HP : %d"), Level, Hp);
 
 }
 
 void UMyActorComponent::OnDamaged(float DamageAmount)
 {
-	Hp -= DamageAmount;
+	int32 NewHp = Hp - DamageAmount;
+	SetHp(NewHp);
+}
+
+void UMyActorComponent::SetHp(int32 NewHp)
+{
+
+	Hp = NewHp;
 	if (Hp < 0)
 	{
 		Hp = 0;
 	}
-	UE_LOG(LogTemp, Warning, TEXT("HP : %d"), Hp);
+
+
+
+
+	OnHpChanged.Broadcast();
+}
+
+float UMyActorComponent::GetHpRatio()
+{
+	// 0 / 100 == 0
+	if (MaxHp == 0 || Hp == 0)
+	{
+		return 0.f;
+	}
+
+	//100 / 100 == 1.f
+	//90 / 100 == 0.9f
+	//10 / 100 == 0.1f
+	return (float)Hp / (float)MaxHp;
 }
 

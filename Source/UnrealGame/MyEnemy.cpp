@@ -3,6 +3,7 @@
 
 #include "MyEnemy.h"
 #include "MyAIController.h"
+#include "MyActorComponent.h"
 
 // Sets default values
 AMyEnemy::AMyEnemy()
@@ -26,7 +27,7 @@ AMyEnemy::AMyEnemy()
 void AMyEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame

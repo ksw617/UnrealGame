@@ -2,4 +2,19 @@
 
 
 #include "MyUserWidget.h"
+#include "MyActorComponent.h"
+#include "Components/ProgressBar.h"
 
+void UMyUserWidget::BindHp(UMyActorComponent* ActorComp)
+{
+
+	MyActorComp = ActorComp;
+	MyActorComp->OnHpChanged.AddUObject(this, &UMyUserWidget::UpdateHp);
+
+}
+
+void UMyUserWidget::UpdateHp()
+{
+	UE_LOG(LogTemp, Warning, TEXT("TEST"));
+	PB_HpBar->SetPercent(MyActorComp->GetHpRatio());
+}

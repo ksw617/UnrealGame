@@ -43,13 +43,20 @@ void AMyCharacter::BeginPlay()
 		AnimInstance->OnAttackHit.AddUObject(this, &AMyCharacter::OnHit);
 	}
 
+	HpBar->InitWidget();
+
+	auto HpWidget = Cast<UMyUserWidget>(HpBar->GetUserWidgetObject());
+	if (HpWidget)
+	{
+		HpWidget->BindHp(MyActorComponent);
+	}
+
 }
 
 // Called to bind functionality to input
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 
 }
 

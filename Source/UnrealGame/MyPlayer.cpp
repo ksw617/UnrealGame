@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "MyActorComponent.h"
 
 AMyPlayer::AMyPlayer()
 {
@@ -26,7 +27,6 @@ AMyPlayer::AMyPlayer()
 		GetMesh()->SetSkeletalMesh(SM.Object);
 		GetMesh()->SetRelativeLocationAndRotation(FVector(0.f, 0.f, -88.f), FRotator(0.f, -90.f, 0.f));
 	}
-
 }
 
 void AMyPlayer::BeginPlay()
