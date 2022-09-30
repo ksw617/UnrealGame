@@ -30,5 +30,5 @@ public:
 	void MoveForwardBackward(float value);
 	void MoveLeftRight(float value);
 	void LookLeftRight(float value);
-
+	void LookUpDown(float value);
 };

@@ -46,7 +46,7 @@ void AMyPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis(TEXT("MoveForwardBackward"), this, &AMyPlayer::MoveForwardBackward);
 	PlayerInputComponent->BindAxis(TEXT("MoveLeftRight"), this, &AMyPlayer::MoveLeftRight);
 	PlayerInputComponent->BindAxis(TEXT("LookLeftRight"), this, &AMyPlayer::LookLeftRight);
-
+	PlayerInputComponent->BindAxis(TEXT("LookUpDown"), this, &AMyPlayer::LookUpDown);
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &AMyPlayer::Jump);
 	PlayerInputComponent->BindAction(TEXT("Attack"), EInputEvent::IE_Pressed, this, &AMyPlayer::Attack);
 
@@ -68,4 +68,10 @@ void AMyPlayer::LookLeftRight(float value)
 {
 	AddControllerYawInput(value);
 }
+
+void AMyPlayer::LookUpDown(float value)
+{
+	AddControllerPitchInput(value);
+}
+
 

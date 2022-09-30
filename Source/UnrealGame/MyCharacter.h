@@ -6,10 +6,13 @@
 #include "GameFramework/Character.h"
 #include "MyCharacter.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(FOnAttackEnd);
 UCLASS()
 class UNREALGAME_API AMyCharacter : public ACharacter
 {
 	GENERATED_BODY()
+
+
 
 protected:
 
@@ -27,7 +30,8 @@ protected:
 		class UMyActorComponent* MyActorComponent;
 	UPROPERTY(VisibleAnywhere)
 		class UWidgetComponent* HpBar;
-
+public:
+	FOnAttackEnd OnAttackEnd;
 public:
 	AMyCharacter();
 protected:
